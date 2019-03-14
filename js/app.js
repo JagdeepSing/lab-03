@@ -106,7 +106,7 @@ $(function() {
 
   let navBtns = () => {
     // create HTML buttons
-    $('main').before(
+    $('#navigation').append(
       '<button class="navButtons" id="data/page-1.json" type="button">Page 1</button>' +
         '<button class="navButtons" id="data/page-2.json" type="button">Page 2</button>'
     );
@@ -123,7 +123,7 @@ $(function() {
   };
 
   let sortBtns = () => {
-    $('main').before(
+    $('#sort').append(
       '<input class="sortBtns" value="title" type="radio" name="sort" checked> Sort by Title </input>' +
         '<input class="sortBtns" value="horns" name="sort" type="radio"> Sort by Horns </input>'
     );
