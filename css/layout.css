@@ -13,6 +13,17 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+#buttons{
+  width: 30%; 
+  display: inline-flex;
+  font-family: 'Shadows Into Light Two', cursive;
+  justify-content: center; 
+  flex-direction: column  
+}
+
+#sort{
+  margin: 3%; 
+}
 
 .navButtons {
   margin: 3%;
@@ -20,6 +31,16 @@
   max-width: 100px;
   height: 50px;
   font-size: 12pt;
+  border-radius: 10%; 
+  background-color: azure; 
+  font-family: 'Shadows Into Light Two', cursive;
+}
+
+.sortBtns{
+ width: 3%; 
+ margin: 3%; 
+ margin-top: 5%; 
+ 
 }
 
 @media (min-width:768px) {
