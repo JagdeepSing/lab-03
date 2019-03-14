@@ -1,0 +1,22 @@
+.animal { 
+  margin: 10px;
+  padding: 30px;
+  align-content: center;
+  width: 300px;
+  max-width: 400px;
+
+}
+
+#animal-wrap { 
+  padding: 0 6%; 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+@media (min-width:768px) {
+  #animal-wrap {
+    max-width: 1000px;
+    justify-content: space-evenly;
+  }
+}
