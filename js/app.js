@@ -1,6 +1,9 @@
 $(function() {
   'use strict';
 
+  let sortedBy = 'title';
+  let currentPage = 'data/page-1.json';
+
   /**
    * Picture is a constructor that takes in
    */
@@ -22,7 +25,6 @@ $(function() {
   Picture.prototype.toHtml = function() {
     let $template = $('#photo-template').html();
     let compiledTemplate = Handlebars.compile($template);
-    console.log($template);
     return compiledTemplate(this);
   };
 
@@ -57,18 +59,27 @@ $(function() {
   };
 
   Picture.loadPictures = (filePath) => {
-    // console.log(Picture.all[filePath]);
+    Picture.all[filePath] = Picture.all[filePath].sort((a, b) => {
+      let sortType = $('.sortBtns:checked').val();
+      if (sortType === 'title') {
+        if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+        if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+        return 0;
+      } else if (sortType === 'horns') {
+        return b.horns - a.horns;
+      }
+    });
+
     Picture.all[filePath].forEach((pic) => {
-      console.log('loadPictures in');
-      console.log(pic.toHtml());
       $('#animal-wrap').append(pic.toHtml());
     });
   };
+  //else this
 
   // filters animals by keyword
   let _filterImages = () => {
     // on any change of the select dropdown list
-    $('filterList').on('change', () => {
+    $('#filterList').on('change', () => {
       let selectedKeyword = $('select option:selected').val();
 
       // if elements are hidden and user selects default option in dropdown list,
@@ -95,24 +106,43 @@ $(function() {
 
   let navBtns = () => {
     // create HTML buttons
-    $('main').before(
-      '<button class="navButtons" id="0" type="button">Page 1</button>' +
-        '<button class="navButtons" id="1" type="button">Page 2</button>'
+    $('#navigation').append(
+      '<button class="navButtons" id="data/page-1.json" type="button">Page 1</button>' +
+        '<button class="navButtons" id="data/page-2.json" type="button">Page 2</button>'
     );
 
     // add event listeners to buttons
 
-    $('navButtons').on('click', () => {
+    $('.navButtons').click(function(event) {
       // TODO:
+      currentPage = event.target.id;
+      $('.animal').remove();
+      Picture.loadPictures(currentPage);
     });
     // hide current page and display clicked page
   };
 
-  //_displayImages();
-  //_filterImages();
+  let sortBtns = () => {
+    $('#sort').append(
+      '<input class="sortBtns" value="title" type="radio" name="sort" checked> Sort by Title </input>' +
+        '<input class="sortBtns" value="horns" name="sort" type="radio"> Sort by Horns </input>'
+    );
+    // add event lisitenters to buttons
+    $('.sortBtns').on('click', function() {
+      let checked = $('.sortBtns:checked').val();
+      if (sortedBy !== checked) {
+        sortedBy = checked;
+        $('.animal').remove();
+        Picture.loadPictures(currentPage);
+      }
+    });
+  };
+
   $(() => {
     Picture.readJSON('data/page-1.json');
     Picture.readJSON('data/page-2.json');
+    _filterImages();
     navBtns();
+    sortBtns();
   });
 });
