@@ -9,14 +9,21 @@ body, main {
 h1 {
   font-size: 10.5vw;
   margin: 5% 0;
-
 }
 
 select {
   width: 50%;
-  height: 43px;
+  height: 45px;
   font-size: 14pt;
   max-width: 200px;
+}
+
+button {
+  margin: 3%;
+  width: 20%;
+  max-width: 100px;
+  height: 50px;
+  font-size: 12pt;
 }
 
 @media (min-width:768px) {

@@ -8,16 +8,16 @@
   margin: 5% auto;
 }
 
-.animal h2 {
+.animal-name {
   font-size: 200%;
   font-weight: 900;
 }
 
-.animal p {
+.animal-description {
   font-size: 150%;
 }
 
-.animal img {
+.animal-image {
   width: 70%;
   border-radius: 30px;
 }
