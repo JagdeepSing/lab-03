@@ -42,7 +42,8 @@ $(function() {
       })
       .then(() => {
         Picture.loadPictures(filePath);
-      });
+      })
+      .then(detailView);
   };
 
   Picture.populateFilter = () => {
@@ -135,6 +136,18 @@ $(function() {
         $('.animal').remove();
         Picture.loadPictures(currentPage);
       }
+    });
+  };
+
+  let detailView = () => {
+    console.log($('.animal-image'));
+    $('.animal-image').on('click', function(event) {
+      $('#large-pic img').src = event.target.src;
+      $('#large-pic img').alt = event.target.alt;
+      $('#large-pic').fadeIn(250);
+      $('#large-pic').on('click', function() {
+        $('#large-pic').fadeOut(250);
+      });
     });
   };
 
