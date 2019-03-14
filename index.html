@@ -11,16 +11,11 @@
     <link rel="stylesheet" href="css/modules.css" />
 
     <script id="photo-template" type="text/x-handlebars-template">
-      <section class="animal " + {{pageNum}} + " " + {{keyword}}>
+      <section class="animal {{keyword}}">
         <h2 class="animal-name">{{name}}</h2>
         <img class="animal-image" src={{imageurl}} alt={{keyword}} />
         <p class="animal-description">{{description}}</p>
       </section>
-    </script>
-
-    <script id="navButton-template" type="text/x-handlebars-template">
-      <button class="navButtons" type="button">{{pageNum1}}</button>
-      <button class="navButtons" type="button">{{pageNum2}}</button>
     </script>
   </head>
   <body>

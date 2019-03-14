@@ -20,7 +20,7 @@ $(function() {
    *
    */
   Picture.prototype.toHtml = function() {
-    let $template = $('#animal-template').html();
+    let $template = $('#photo-template').html();
     let compiledTemplate = Handlebars.compile($template);
     console.log($template);
     return compiledTemplate(this);
@@ -57,19 +57,13 @@ $(function() {
   };
 
   Picture.loadPictures = (filePath) => {
-    // console.log('loadPictures');
     // console.log(Picture.all[filePath]);
     Picture.all[filePath].forEach((pic) => {
-      console.log('loadPictures fn');
+      console.log('loadPictures in');
+      console.log(pic.toHtml());
       $('#animal-wrap').append(pic.toHtml());
     });
   };
-
-  // // TODO: read in json for each .json file in data folder
-  $(() => {
-    Picture.readJSON('data/page-1.json');
-    Picture.readJSON('data/page-2.json');
-  });
 
   // filters animals by keyword
   let _filterImages = () => {
@@ -117,6 +111,8 @@ $(function() {
   //_displayImages();
   //_filterImages();
   $(() => {
+    Picture.readJSON('data/page-1.json');
+    Picture.readJSON('data/page-2.json');
     navBtns();
   });
 });
