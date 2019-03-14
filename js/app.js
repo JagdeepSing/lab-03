@@ -1,6 +1,9 @@
 $(function() {
   'use strict';
 
+  let sortedBy = 'title';
+  let currentPage = 'data/page-1.json';
+
   /**
    * Picture is a constructor that takes in
    */
@@ -57,17 +60,22 @@ $(function() {
   };
 
   Picture.loadPictures = (filePath) => {
-    // console.log(Picture.all[filePath]);
+
     Picture.all[filePath].forEach((pic) => {
       console.log('loadPictures in');
       console.log(pic.toHtml());
       $('#animal-wrap').append(pic.toHtml());
     });
+    // Array.sort(sortFunction)
+    //if title
+
   };
+  //else this
+
 
   // filters animals by keyword
   let _filterImages = () => {
-    // on any change of the select dropdown list
+  // on any change of the select dropdown list
     $('filterList').on('change', () => {
       let selectedKeyword = $('select option:selected').val();
 
@@ -76,9 +84,9 @@ $(function() {
       if (selectedKeyword === 'default') {
         $('.animal:hidden').show();
       } else {
-        // takes jQuery matched set and converts to an array and iterates over each HTML element
-        // and after converting each element back to a jQuery object (in order to use jQuery methods)
-        // filters objects for only those with the class of the selected keyword
+      // takes jQuery matched set and converts to an array and iterates over each HTML element
+      // and after converting each element back to a jQuery object (in order to use jQuery methods)
+      // filters objects for only those with the class of the selected keyword
         $('.animal')
           .toArray()
           .forEach((val) => {
@@ -94,7 +102,7 @@ $(function() {
   };
 
   let navBtns = () => {
-    // create HTML buttons
+  // create HTML buttons
     $('main').before(
       '<button class="navButtons" id="0" type="button">Page 1</button>' +
         '<button class="navButtons" id="1" type="button">Page 2</button>'
@@ -103,10 +111,33 @@ $(function() {
     // add event listeners to buttons
 
     $('navButtons').on('click', () => {
-      // TODO:
+    // TODO:
     });
-    // hide current page and display clicked page
+  // hide current page and display clicked page
   };
+
+  let sortBtns = () => {
+    $('main').before(
+      '<button class="sortBtns" value="title" type="radio" checked> Sort by Title </button>' + '<button class="sortBtns" value="horns" type="radio"> Sort by Horns </button>'
+    )
+
+  }
+  // add event lisitenters to buttons
+  $('sortBtns').on('click', function() {
+
+    if( sortedBy !== this.val()){
+      sortedBy = this.val()
+      $('.animal').remove();
+      loadPictures(currentPage);
+    }
+
+  });
+
+  //reorder based on the sort type
+  //query all animals
+  //title
+  //horns
+
 
   //_displayImages();
   //_filterImages();
